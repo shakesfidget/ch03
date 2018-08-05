@@ -32,11 +32,11 @@ public class ChessGui extends JPanel {
 	private static final int BOARD_START_X = 300;
 	private static final int BOARD_START_Y = 50;
 
-	private static final int SQUARE_WIDTH = 50;
-	private static final int SQUARE_HEIGHT = 50;
+	private static final int SQUARE_WIDTH = 25;
+	private static final int SQUARE_HEIGHT = 25;
 	
-	private static final int PIECE_WIDTH = 100;
-	private static final int PIECE_HEIGHT = 100;
+	private static final int PIECE_WIDTH = 25;
+	private static final int PIECE_HEIGHT = 25;
 	
 	public final int START_CUSTOM_ROW = 200 / SQUARE_HEIGHT; //unschön, wird in button und custom gui verwendet
 	public final int START_CUSTOM_COLUMN = 250 / SQUARE_WIDTH;
@@ -168,7 +168,7 @@ public class ChessGui extends JPanel {
 		
 		for (int i = guiPieces.size()-1; i >= 0; i--) {
 
-			if(guiPieces.get(i).getX()  == START_CUSTOM_COLUMN * SQUARE_WIDTH) //wenn custom existiert
+			if(guiPieces.get(i).getX()  == BOARD_START_X - START_CUSTOM_COLUMN * SQUARE_WIDTH) //wenn custom existiert
 			{
 				guiPieces.remove( i );
 			}
@@ -179,6 +179,8 @@ public class ChessGui extends JPanel {
 		
 		piece.setWidth( (Integer) this.m_numberSpinnerWidth.getValue());
 		piece.setHeight( (Integer) this.m_numberSpinnerHeight.getValue());
+		System.out.println(piece.getHeight());
+		System.out.println(piece.getColumn());
 		
 		this.guiPieces.add(guiPiece);
 	}
@@ -192,6 +194,17 @@ public class ChessGui extends JPanel {
 		g.setColor(Color.BLACK);
 		g.drawRect(40, 90, 210, 120);
 		
+		
+		//for (int i = 0; i < 50; i++) {
+		//	for (int j = 0; j < 30; j++)
+		//	{
+		//		g.setColor(Color.WHITE);
+		//		g.fillRect(BOARD_START_X + SQUARE_WIDTH*i, BOARD_START_Y + SQUARE_HEIGHT*j, SQUARE_WIDTH, SQUARE_HEIGHT);
+		//		g.setColor(Color.BLACK);
+		//		g.drawRect(BOARD_START_X + SQUARE_WIDTH*i, BOARD_START_Y + SQUARE_HEIGHT*j, SQUARE_WIDTH, SQUARE_HEIGHT);	
+		//	}
+		//}
+
 		
 		for (GuiPiece piece : this.guiPieces) {
 			//g.drawImage(piece.getImage(), piece.getX(), piece.getY(), null);
@@ -277,7 +290,7 @@ public class ChessGui extends JPanel {
 		int targetRow = ChessGui.convertYToRow(y);
 		int targetColumn = ChessGui.convertXToColumn(x);
 
-		if( targetRow < Piece.ROW_1 || targetRow > (Piece.ROW_8-(dragPiece.getHeight()-SQUARE_HEIGHT)/50) || targetColumn < Piece.COLUMN_A || targetColumn > (Piece.COLUMN_H-(dragPiece.getWidth()-SQUARE_WIDTH)/50)){
+		if( targetRow < Piece.ROW_1 || targetRow > 30-dragPiece.getHeight()/SQUARE_HEIGHT|| targetColumn < Piece.COLUMN_A || targetColumn > 60-dragPiece.getWidth()/SQUARE_WIDTH){
 			// reset piece position if move is not valid
 			dragPiece.resetToUnderlyingPiecePosition();
 		
