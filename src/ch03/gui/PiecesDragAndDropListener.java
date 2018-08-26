@@ -5,20 +5,20 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
 
-import ch03.logic.ChessGame;
+import ch03.logic.LagerLogic;
 import ch03.logic.Piece;
 
 public class PiecesDragAndDropListener implements MouseListener, MouseMotionListener {
 
 	//private List<GuiPiece> guiPieces;
-	private ChessGui chessGui;
+	private LagerGui chessGui;
 	
 	private GuiPiece dragPiece;
 	private int dragOffsetX;
 	private int dragOffsetY;
 	
 
-	public PiecesDragAndDropListener(List<GuiPiece> guiPieces, ChessGui chessGui) {
+	public PiecesDragAndDropListener(List<GuiPiece> guiPieces, LagerGui chessGui) {
 
 		this.chessGui = chessGui;
 	}
@@ -102,8 +102,8 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
 			int y = evt.getPoint().y - this.dragOffsetY;
 			
 			System.out.println(
-					"row:"+ChessGui.convertYToRow(y)
-					+" column:"+ChessGui.convertXToColumn(x));
+					"row:"+LagerGui.convertYToRow(y)
+					+" column:"+LagerGui.convertXToColumn(x));
 			
 			this.dragPiece.setX(x);
 			this.dragPiece.setY(y);

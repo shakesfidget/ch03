@@ -58,8 +58,8 @@ public class GuiPiece {
 	 * correspond with the underlying piece's row and column
 	 */
 	public void resetToUnderlyingPiecePosition() {
-		this.x = ChessGui.convertColumnToX(piece.getColumn());
-		this.y = ChessGui.convertRowToY(piece.getRow());
+		this.x = LagerGui.convertColumnToX(piece.getColumn());
+		this.y = LagerGui.convertRowToY(piece.getRow());
 	}
 
 	public Piece getPiece() {

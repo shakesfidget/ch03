@@ -3,7 +3,10 @@ package ch03.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessGame {
+import ch03.gui.GuiPiece;
+import ch03.gui.LagerGui;
+
+public class LagerLogic {
 	
 
 	
@@ -13,7 +16,7 @@ public class ChessGame {
 	/**
 	 * initialize game
 	 */
-	public ChessGame(){
+	public LagerLogic(){
 		
 		// create and place pieces
 		// rook, knight, bishop, queen, king, bishop, knight, and rook
@@ -42,20 +45,43 @@ public class ChessGame {
 	}
 	
 	
-	public Piece createAndAddCustomPiece(int color, int row, int column) {
+
+	
+public boolean placePiece(int targetRow, int targetColumn, int width, int height) {
 		
-		for (int i = pieces.size()-1; i >= 0; i--) {
-			
-			if(this.pieces.get(i).getColumn() == column) //wenn custom existiert löschen
-			{
-				this.pieces.remove( i );
+
+		
+				
+				for (Piece otherPiece : this.pieces)
+				{
+
+						int widtho = otherPiece.getWidth(); // = 2
+						int heighto = otherPiece.getHeight(); // = 1					
+												
+						for(int i = width-1; i >= 0; i--)
+						{
+							for(int j = height-1; j >= 0; j--)
+							{	
+								for(int k = widtho-1; k>=0;k--)
+								{
+									for(int l = heighto-1;l>=0;l--)
+									{
+										if (targetRow+j == otherPiece.getRow()+l && targetColumn+i == otherPiece.getColumn()+k)
+										{	
+											System.out.println("besetzt bei" + targetColumn + "/" + targetRow);
+											return true;						
+										}
+									}
+								}
+
+							}
+						}	
+				}
+				return false;
 			}
-		}
-		
-		Piece piece = new Piece(color, row, column);
-		this.pieces.add(piece);
-		return piece;
-	}
+				
+
+	
 	
 	
 
